@@ -2,13 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
-//da song node
-struct song_node{
-  char * name;
-  char * artist;
-  struct song_node * next;
-};
+#include "muselink.h"
 
 void print_list(struct song_node * list){
   printf("format: song title by artist\n");

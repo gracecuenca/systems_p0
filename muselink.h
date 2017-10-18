@@ -1,3 +1,9 @@
+struct song_node{
+  char * name;
+  char * artist;
+  struct song_node * next;
+};
+
 struct song_node * insert_front(struct song_node * list, char * song_name, char * song_artist);
 struct song_node * insert_order(struct song_node * list, char * song_name, char * song_artist);
 void print_list(struct song_node * list);
