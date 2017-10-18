@@ -76,7 +76,43 @@ struct song_node * ret_song_artist(struct song_node * list, char * song_name, ch
   return NULL;
 }
 
+struct song_node * ret_first_song(struct song_node * list, char * song_artist){
+  while(list){
+    if(song_artist == list->artist){
+      printf("first song by %s is %s!\n", song_artist, list->name);
+      return list;
+    }
+    list = list->next;
+  }
+  printf("%s is not an artist in this list :(\n", song_artist);
+  return NULL;
+}
+
+struct song_node * remove_random(struct song_node * list, int x){
+
+}
+
+struct song_node * free_spec(struct song_node * list, char * song_name, char * song_artist){
+  struct song_node * ret = list;
+  struct song_node * prev = list;
+  while(list){
+    if(song_artist == list-> artist && song_name == list-> name){
+      prev-> next = list-> next;
+      struct song_node * temp = list;
+      free(temp);
+      temp = NULL;
+      break;
+    }
+    prev = list;
+    list = list-> next;
+  }
+  return ret;
+}
+
 int main(){
+
+  srand( time(NULL) );
+
   struct song_node * jamz = 0;
   jamz = insert_front(jamz, "high on you", "survivor");
   jamz = insert_front(jamz, "livin' on a prayer", "bon jovi");
@@ -90,8 +126,15 @@ int main(){
   jamz = insert_order(jamz, "talk is cheap", "chet faker");
   jamz = insert_order(jamz, "you give love a bad name", "bon jovi");
   jamz = insert_order(jamz, "knockout", "bon jovi");
-  print_list(jamz);
+  //print_list(jamz);
   ret_song_artist(jamz, "high on you", "survivor");
   ret_song_artist(jamz, "what do you mean", "justin bieber");
+  ret_first_song(jamz, "survivor");
+  ret_first_song(jamz, "paramore");
+  //printf("freeing all da songz...\n");
+  //jamz = free_list(jamz);
+  //print_list(jamz);
+  jamz = free_spec(jamz, "high on you", "survivor");
+  print_list(jamz);
   return 0;
 }
