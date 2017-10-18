@@ -41,12 +41,9 @@ struct song_node * insert_order(struct song_node * list, char * song_name, char 
     if(strcmp(insert-> artist, list->artist) < 0){
       break;
     }
-    else{
-      if(strcmp(insert-> artist, list->artist) == 0){
-        if(strcmp(insert->name, list->name) >0){
-        }
-        else{
-        }
+    else if(strcmp(insert-> artist, list->artist) == 0){
+      if(strcmp(insert->name, list->name) < 0){
+        break;
       }
     }
     prev = list;
@@ -67,13 +64,15 @@ struct song_node * free_list(struct song_node * list){
   return list;
 }
 
-struct song_node * ret_song(char * song_name, struct song_node * list){
+struct song_node * ret_song_artist(struct song_node * list, char * song_name, char * song_artist){
   while(list){
-    if(song_name == list->name){
+    if(song_name == list->name && song_artist == list-> artist){
+      printf("%s by %s found!\n", song_name, song_artist);
       return list;
     }
     list = list-> next;
   }
+  printf("%s by %s not found :(\n", song_name, song_artist);
   return NULL;
 }
 
@@ -84,8 +83,15 @@ int main(){
   jamz = insert_order(jamz, "zombie", "the cranberries");
   jamz = insert_order(jamz, "turn me on", "the grates");
   jamz = insert_order(jamz, "hey jude", "the beatles");
-  jamz = insert_order(jamz, "knockout", "bon jovi");
   jamz = insert_order(jamz, "dancing queen", "abba");
+  jamz = insert_order(jamz, "the search is over", "survivor");
+  jamz = insert_order(jamz, "strawberry fields forever", "the beatles");
+  jamz = insert_order(jamz, "science is golden", "the grates");
+  jamz = insert_order(jamz, "talk is cheap", "chet faker");
+  jamz = insert_order(jamz, "you give love a bad name", "bon jovi");
+  jamz = insert_order(jamz, "knockout", "bon jovi");
   print_list(jamz);
+  ret_song_artist(jamz, "high on you", "survivor");
+  ret_song_artist(jamz, "what do you mean", "justin bieber");
   return 0;
 }
