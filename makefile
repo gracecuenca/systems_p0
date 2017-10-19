@@ -1,3 +1,3 @@
 run:
-	gcc -o jamz muselink.c
+	gcc -o jamz myjamz.c
 	./jamz

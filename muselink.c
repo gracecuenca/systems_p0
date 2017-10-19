@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "muselink.h"
 
 void print_list(struct song_node * list){
-  printf("format: song title by artist\n");
+  //printf("format: song title by artist\n");
   while(list){
     printf("~~~~~~");
     printf("|%s by %s|\n", list->name, list-> artist);
@@ -82,10 +81,12 @@ struct song_node * ret_first_song(struct song_node * list, char * song_artist){
   return NULL;
 }
 
+//FINISH THIS!!!!!
+/*
 struct song_node * remove_random(struct song_node * list, int x){
 
 }
-
+*/
 struct song_node * free_spec(struct song_node * list, char * song_name, char * song_artist){
   struct song_node * ret = list;
   struct song_node * prev = list;
@@ -101,34 +102,4 @@ struct song_node * free_spec(struct song_node * list, char * song_name, char * s
     list = list-> next;
   }
   return ret;
-}
-
-int main(){
-
-  srand( time(NULL) );
-
-  struct song_node * jamz = 0;
-  jamz = insert_front(jamz, "high on you", "survivor");
-  jamz = insert_front(jamz, "livin' on a prayer", "bon jovi");
-  jamz = insert_order(jamz, "zombie", "the cranberries");
-  jamz = insert_order(jamz, "turn me on", "the grates");
-  jamz = insert_order(jamz, "hey jude", "the beatles");
-  jamz = insert_order(jamz, "dancing queen", "abba");
-  jamz = insert_order(jamz, "the search is over", "survivor");
-  jamz = insert_order(jamz, "strawberry fields forever", "the beatles");
-  jamz = insert_order(jamz, "science is golden", "the grates");
-  jamz = insert_order(jamz, "talk is cheap", "chet faker");
-  jamz = insert_order(jamz, "you give love a bad name", "bon jovi");
-  jamz = insert_order(jamz, "knockout", "bon jovi");
-  //print_list(jamz);
-  ret_song_artist(jamz, "high on you", "survivor");
-  ret_song_artist(jamz, "what do you mean", "justin bieber");
-  ret_first_song(jamz, "survivor");
-  ret_first_song(jamz, "paramore");
-  //printf("freeing all da songz...\n");
-  //jamz = free_list(jamz);
-  //print_list(jamz);
-  jamz = free_spec(jamz, "high on you", "survivor");
-  print_list(jamz);
-  return 0;
 }
