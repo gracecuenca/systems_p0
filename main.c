@@ -7,8 +7,10 @@
 
 int main(){
 
+  srand( time(NULL) );
+
   printf("=======================================\n");
-  printf("Testing Music Linked List Functionality\n");
+  printf("TESTING MUSIC LINKED LIST FUNCTIONALITY\n");
   printf("=======================================\n\n");
   struct song_node * jamz = 0;
 
@@ -16,12 +18,14 @@ int main(){
   printf("          Adding some songs...\n");
   printf("=======================================\n\n");
 
+  printf("inserting 'high on you' by survivor\n\n");
   jamz = insert_front(jamz, "high on you", "survivor");
 
   printf("=======================================\n");
   printf("  Testing insert_front and print_list\n");
   printf("=======================================\n\n");
 
+  printf("inserting a lot of song\n\n");
   print_list(jamz);
   printf("\n");
 
@@ -57,6 +61,7 @@ int main(){
   printf("=======================================\n");
   printf("     Testing first song by artist\n");
   printf("=======================================\n\n");
+  printf("printing the first song by survivor\n");
   ret_first_song(jamz, "survivor");
   printf("\n");
   ret_first_song(jamz, "paramore");
@@ -65,7 +70,8 @@ int main(){
   printf("=======================================\n");
   printf("       Testing random element\n");
   printf("=======================================\n\n");
-
+  ret_random(jamz);
+  ret_random(jamz);
   ret_random(jamz);
   printf("\n");
 
@@ -83,10 +89,11 @@ int main(){
   printf("       Freeing the entire list :0\n");
   printf("=======================================\n\n");
   free_list(jamz);
-  printf("\n\n\n");
+  printf("everything freed!\n");
+  printf("\n");
 
   printf("=======================================\n");
-  printf("Testing Array of Music Linked List Func\n");
+  printf("TESTING ARRAY OF MUSIC LINKED LIST FUNC\n");
   printf("=======================================\n\n");
 
   struct song_node * table[26];
@@ -111,18 +118,22 @@ int main(){
   add_song(table, "high on you", "survivor");
   add_song(table, "all i want", "kodaline");
   add_song(table, "love runs out", "onerepublic");
+  add_song(table, "no surprises", "radiohead");
 
-  print_list(table[7]);
   printf("=======================================\n");
   printf("    Printing Out the Entire Library\n");
   printf("=======================================\n\n");
   print_library(table);
+  printf("\n");
 
   printf("=======================================\n");
   printf("          Searching for Artist\n");
   printf("=======================================\n\n");
+  printf("searching for billy joel...\n");
   artist_search(table, "billy joel");
-  //artist_search(table, "the backstreet boys"); doesnt work
+  printf("searching for backstreet boys...\n");
+  artist_search(table, "the backstreet boys");
+  printf("\n");
 
   printf("=======================================\n");
   printf("   Printing Out Entries Under Letter\n");
@@ -134,24 +145,27 @@ int main(){
   printf("Printing Out Entries Under Certain Artist\n");
   printf("=======================================\n\n");
   print_artist(table, "milky chance");
-
   printf("\n");
 
+  printf("=======================================\n");
+  printf("           Testing Shuffle\n");
+  printf("=======================================\n\n");
+  printf("shuffling...\n");
   shuffle(table);
-
-  print_library(table);
   printf("\n");
+
+  printf("=======================================\n");
+  printf("            Testing Delete\n");
+  printf("=======================================\n\n");
+  printf("removing 'alone by heart'\n");
   delete_song(table, "alone", "heart");
   print_library(table);
+  printf("\n");
 
-  song_search(table, "alone", "heart");
-  artist_search(table, "taylor swift");
-  print_artist(table, "kodaline");
-  
-/*
-Print out the entire library.
-Shuffle - print out a series of randomly chosen songs.
-Delete a song
-Delete all the nodes.
-*/
+  printf("=======================================\n");
+  printf("            Testing Delete All\n");
+  printf("=======================================\n\n");
+  delete_songs(table);
+  printf("\n");
+
 }

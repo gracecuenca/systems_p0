@@ -68,7 +68,7 @@ void free_list(struct song_node * list){
     free(temp);
     temp = NULL;
   }
-  printf("every song freed!\n");
+  //printf("every song freed!\n");
 }
 
 struct song_node * ret_song_artist(struct song_node * list, char * song_name, char * song_artist){
@@ -96,7 +96,6 @@ struct song_node * ret_first_song(struct song_node * list, char * song_artist){
 }
 
 struct song_node * ret_random(struct song_node * list){
-  srand( time(NULL) );
   int x = rand() % 20;
   int i = rand() % 10;
   struct song_node * temp = list;
