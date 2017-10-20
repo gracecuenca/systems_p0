@@ -4,6 +4,14 @@
 #include <time.h>
 #include "muselink.h"
 
+struct song_node * construct_song_node(char * song_name, char * song_artist){
+  struct song_node * new_node = malloc(sizeof(struct song_node));
+  new_node-> name = song_name;
+  new_node-> artist = song_artist;
+  new_node-> next = NULL;
+  return new_node;
+}
+
 void print_list(struct song_node * list){
   //printf("format: song title by artist\n");
   while(list){
@@ -18,29 +26,30 @@ void print_song(struct song_node * list){
 }
 
 struct song_node * insert_front(struct song_node * list, char * song_name, char * song_artist){
-  struct song_node * temp = malloc(sizeof(struct song_node));
-  temp -> name = song_name;
-  temp -> artist = song_artist;
-  temp-> next = list;
-  return temp;
+  struct song_node * front = malloc(sizeof(struct song_node));
+  front -> name = song_name;
+  front -> artist = song_artist;
+  front-> next = list;
+  return front;
 }
 
 struct song_node * insert_order(struct song_node * list, char * song_name, char * song_artist){
-  struct song_node * temp = list;
-  struct song_node * prev = malloc(sizeof(struct song_node));
-  struct song_node * insert = malloc(sizeof(struct song_node));
-  insert->name = song_name;
-  insert->artist = song_artist;
-  insert->next = NULL;
-  if(strcmp(insert-> artist, list->artist) < 0){
-    return insert_front(temp, insert->name, insert->artist);
+
+  struct song_node * insert = construct_song_node(song_name, song_artist);
+
+  if(strcmp(song_artist, list->artist) < 0){
+    return insert_front(list, song_name, song_artist);
   }
+
+  struct song_node * front = list;
+  struct song_node * prev = malloc(sizeof(struct song_node));
+
   while(list){
-    if(strcmp(insert-> artist, list->artist) < 0){
+    if(strcmp(song_artist, list->artist) < 0){
       break;
     }
-    else if(strcmp(insert-> artist, list->artist) == 0){
-      if(strcmp(insert->name, list->name) < 0){
+    else if(strcmp(song_artist, list->artist) == 0){
+      if(strcmp(song_name, list->name) < 0){
         break;
       }
     }
@@ -49,7 +58,7 @@ struct song_node * insert_order(struct song_node * list, char * song_name, char 
   }
   insert -> next = list;
   prev-> next = insert;
-  return temp;
+  return front;
 }
 
 void free_list(struct song_node * list){

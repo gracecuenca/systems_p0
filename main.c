@@ -6,7 +6,6 @@
 #include "myjamz.c"
 
 int main(){
-  struct song_node * table[26];
 
   printf("=======================================\n");
   printf("Testing Music Linked List Functionality\n");
@@ -34,7 +33,7 @@ int main(){
   jamz = insert_order(jamz, "the search is over", "survivor");
   jamz = insert_order(jamz, "strawberry fields forever", "the beatles");
   jamz = insert_order(jamz, "science is golden", "the grates");
-  jamz = insert_order(jamz, "talk is cheap", "chet faker");
+  jamz = insert_order(jamz, "gold", "chet faker");
   jamz = insert_order(jamz, "you give love a bad name", "bon jovi");
   jamz = insert_order(jamz, "knockout", "bon jovi");
   jamz = insert_order(jamz, "karma chameleon", "culture club");
@@ -90,6 +89,13 @@ int main(){
   printf("Testing Array of Music Linked List Func\n");
   printf("=======================================\n\n");
 
+  struct song_node * table[26];
+  int i = 0;
+  while(i<26){
+    table[i] = 0;
+    i++;
+  }
+
   add_song(table, "like a rolling stone", "bob dylan");
   add_song(table, "karma chameleon", "culture club");
   add_song(table, "every breath you take", "the police");
@@ -104,18 +110,32 @@ int main(){
   add_song(table, "alone", "heart");
   add_song(table, "high on you", "survivor");
   add_song(table, "all i want", "kodaline");
-/*
+  add_song(table, "love runs out", "onerepublic");
+
+  print_list(table[7]);
   printf("=======================================\n");
   printf("    Printing Out the Entire Library\n");
   printf("=======================================\n\n");
   print_library(table);
-*/
+
   printf("=======================================\n");
   printf("          Searching for Artist\n");
   printf("=======================================\n\n");
   artist_search(table, "billy joel");
-  //artist_search(table, "the backstreet boys");
+  //artist_search(table, "the backstreet boys"); doesnt work
 
+  printf("=======================================\n");
+  printf("   Printing Out Entries Under Letter\n");
+  printf("=======================================\n\n");
+  print_letter(table, 'b');
+  printf("\n");
+
+  printf("=======================================\n");
+  printf("Printing Out Entries Under Certain Artist\n");
+  printf("=======================================\n\n");
+  print_artist(table, "milky chance");
+
+  printf("\n");
 
   shuffle(table);
 
@@ -124,15 +144,11 @@ int main(){
   delete_song(table, "alone", "heart");
   print_library(table);
 
-  print_letter(table, 'b');
   song_search(table, "alone", "heart");
   artist_search(table, "taylor swift");
   print_artist(table, "kodaline");
+  
 /*
-Search for a song given song and artist name (return a pointer).
-Search for an artist (return a pointer).
-Print out all the entries under a certain letter.
-Print out all the songs of a certain artist
 Print out the entire library.
 Shuffle - print out a series of randomly chosen songs.
 Delete a song

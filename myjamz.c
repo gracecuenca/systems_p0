@@ -8,7 +8,7 @@ void add_song(struct song_node * list[], char * name, char * artist){
   char first_letter = artist[0];
   int i = first_letter - 'a';
   if(list[i]){
-    list[i] = insert_front(list[i], name, artist);
+    list[i] = insert_order(list[i], name, artist);
   }
   else{
     list[i] = insert_front(list[i], name, artist);
@@ -38,7 +38,6 @@ struct song_node * artist_search(struct song_node * list[], char * artist){
   while(ret){
     if(ret-> artist == artist){
       printf("%s found!\n", artist);
-      //print_list(ret);
       return ret;
     }
     ret= ret->next;
@@ -67,12 +66,12 @@ void print_artist(struct song_node * list[], char * artist){
   }
 }
 
-void print_library(struct song_node * list[]){
+void print_library(struct song_node * list[]) {
   int i = 0;
   while(i < 26){
     if(list[i]){
       print_list(list[i]);
-    }
+    } 
     i++;
   }
 }
