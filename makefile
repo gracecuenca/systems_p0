@@ -1,3 +1,3 @@
 run:
-	gcc -o jamz myjamz.c
+	gcc -o jamz main.c
 	./jamz

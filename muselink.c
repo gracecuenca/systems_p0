@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "muselink.h"
 
 void print_list(struct song_node * list){
   //printf("format: song title by artist\n");
@@ -10,6 +11,10 @@ void print_list(struct song_node * list){
     printf("|%s by %s|\n", list->name, list-> artist);
     list = list->next;
   }
+}
+
+void print_song(struct song_node * list){
+  printf("|%s by %s|\n", list->name, list-> artist);
 }
 
 struct song_node * insert_front(struct song_node * list, char * song_name, char * song_artist){
@@ -47,14 +52,14 @@ struct song_node * insert_order(struct song_node * list, char * song_name, char 
   return temp;
 }
 
-struct song_node * free_list(struct song_node * list){
+void free_list(struct song_node * list){
   while(list){
     struct song_node * temp = list;
     list = list-> next;
     free(temp);
     temp = NULL;
   }
-  return list;
+  printf("every song freed!\n");
 }
 
 struct song_node * ret_song_artist(struct song_node * list, char * song_name, char * song_artist){
@@ -81,25 +86,39 @@ struct song_node * ret_first_song(struct song_node * list, char * song_artist){
   return NULL;
 }
 
-//FINISH THIS!!!!!
-/*
-struct song_node * remove_random(struct song_node * list, int x){
-
+struct song_node * ret_random(struct song_node * list){
+  srand( time(NULL) );
+  int x = rand() % 20;
+  int i = rand() % 10;
+  struct song_node * temp = list;
+  while(x > 0){
+    if(temp-> next){
+      temp = temp->next;
+    }
+    x--;
+  }
+  //printf("%s by %s was removed", temp->name, temp->artist);
+  print_song(temp);
+  return temp;
+  //return free_spec(list, temp->name, temp->artist);
 }
-*/
+
 struct song_node * free_spec(struct song_node * list, char * song_name, char * song_artist){
-  struct song_node * ret = list;
+  struct song_node * holder = list;
   struct song_node * prev = list;
-  while(list){
-    if(song_artist == list-> artist && song_name == list-> name){
-      prev-> next = list-> next;
-      struct song_node * temp = list;
+  if(song_artist == holder->artist && song_name == holder->name){
+    list = list->next;
+  }
+  while(holder){
+    if(song_artist == holder-> artist && song_name == holder-> name){
+      prev-> next = holder-> next;
+      struct song_node * temp = holder;
       free(temp);
       temp = NULL;
       break;
     }
-    prev = list;
-    list = list-> next;
+    prev = holder;
+    holder = holder-> next;
   }
-  return ret;
+  return list;
 }
